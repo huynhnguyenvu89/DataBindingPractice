@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import
+            alias="BIM"
+            type="com.vuhuynh.databindinglist.BindingIdMatcher"/>
         <variable
-            name="userList"
+            name="userListModel"
             type="com.vuhuynh.databindinglist.UserListViewModel"/>
     </data>
 
@@ -13,13 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{userList.name}" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            bind:data="@{userListModel.users}"
+            bind:layoutId="@{@layout/user_item}"
+            bind:variable='@{BIM.id("user")}'
+            bind:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            />
+
     </LinearLayout>
 </layout>
